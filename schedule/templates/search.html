@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Gardner Class Schedule" %}{% endblock %}
+{% block content %}
+  <form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+  <ul>
+  {% for class_schedule in filter.qs %}
+    {% if class_schedule %}
+    <table class="table table-bordered table-striped">
+
+      <tbody>
+
+          <tr>
+        <th>{{ class_schedule.classgroup }}</th>
+        <th>{{ class_schedule.teacher }}</th>
+        <th>{{ class_schedule.period }}</th>
+        <th>{{ class_schedule.subject }}</th> 
+        </tr>
+
+      </tbody>
+
+    </table>
+
+{% else %}
+    <p>{% trans "There are no available exams" %}.</p>
+{% endif %}
+  {% endfor %}
+  </ul>
+{% endblock %}
+

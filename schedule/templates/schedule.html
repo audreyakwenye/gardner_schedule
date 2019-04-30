@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Gardner Class Schedule" %}{% endblock %}
+
+{% block content %}
+<br/>
+<br/>
+<h3>Gardner Class Schedule</h3>
+<br/>
+<div>
+		<ul class="list-group list-group-horizontal">
+		<li><a type="button" class="btn btn-light" href="{% url 'home' %}" role="button">Back to Homepage</a></li>
+		<br/>
+		<li><a type="button" class="btn btn-light" href="{% url 'schedule' %}" role="button">All Exam Dates</a></li>
+		<br/>
+	</ul>
+</div>
+<br/>
+{% if class_schedule_list %}
+		<table class="table table-bordered table-striped">
+		  <thead>
+			<tr>
+		<th>{% trans "Class" %}</th>
+        <th>{% trans "Teacher" %}</th>
+        <th>{% trans "Period" %}</th>
+        <th>{% trans "Subject" %}</th>
+			</tr>
+		  </thead>
+
+		  <tbody>
+
+        {% for class in class_schedule_list %}
+
+  			<tr>
+            <th>{{ class.classgroup }}</th>
+            <th>{{ class.teacher }}</th>
+            <th>{{ class.period }}</th>
+            <th>{{ class.subject }}</th> 
+			</tr>
+
+        {% endfor %}
+		  </tbody>
+
+		</table>
+
+	{% else %}
+        <p>{% trans "There are no available exams" %}.</p>
+	{% endif %}
+
+
+{% endblock %}
